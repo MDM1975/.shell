@@ -29,7 +29,9 @@ function weather () {
     [[ $# == 0 ]] && {
         print -P '\n%F{red}usage%f %F{blue}==>%f weather <city>+<state>\n'
     } || {
-        curl "https://wttr.in/$1"
+        WEATHER=$(curl -s "https://v2.wttr.in/$1?u")
+        echo $WEATHER | grep 'Weather:' | sed 's|Weather:||'
+        echo $WEATHER | grep 'Location:' | sed 's|Location:||'
     }
 }
 
