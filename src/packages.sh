@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-function package () {
+function __init_packages () {
     eval "$(pyenv init -)"
     eval "$(rbenv init - zsh)"
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -19,5 +19,5 @@ function package () {
 [[ -z $(which brew) ]] && {
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 } || {
-    package
+    __init_packages
 }
