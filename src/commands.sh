@@ -6,7 +6,7 @@ function ls () {
 
 function zshre () {
     source "$HOME/.zshrc"
-    print -P "%F{green}==> zsh resourced%f"
+    print -P "%F{green}==>%f zsh resourced"
 }
 
 function refresh () {
