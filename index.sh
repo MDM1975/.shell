@@ -1,5 +1,13 @@
-#!/usr/bin/env zsh
+local SHARED=($HOME/.shell/shared/*)
 
-for file in $HOME/.shell/src/*
-    do source $file
+for i in $SHARED
+    do source $i
 done
+
+[[ -d "$HOME/.shell/private/" ]] && {
+    local PRIVATE=($HOME/.shell/private/)
+
+    for i in $PRIVATE
+        do source $i
+    done
+}

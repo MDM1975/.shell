@@ -1,10 +1,8 @@
-#!/usr/bin/env zsh
-
 autoload -Uz promptinit
 autoload -Uz vcs_info
 
-zstyle ":vcs_info:*" actionformats "%b|%a"
 zstyle ":vcs_info:*" formats "%b"
+zstyle ":vcs_info:*" actionformats "%b|%a"
 
 function precmd () {
   vcs_info && set_prompt
