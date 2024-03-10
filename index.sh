@@ -5,7 +5,7 @@ for i in $SHARED
 done
 
 [[ -d "$HOME/.shell/private/" ]] && {
-    local PRIVATE=($HOME/.shell/private/)
+    local PRIVATE=($HOME/.shell/private/*)
 
     for i in $PRIVATE
         do source $i
