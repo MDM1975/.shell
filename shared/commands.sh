@@ -34,7 +34,7 @@ function zshre () {
 # parameters:
 #   $1 - The flag to perform a hard reset
 function sysre () {
-    [[ "$(which brew)" == "brew not found" ]] && {
+    [[ "$(which brew)" != "brew not found" ]] && {
         brew update -v
         brew upgrade -v
         brew autoremove -v
