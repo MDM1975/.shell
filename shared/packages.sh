@@ -1,61 +1,69 @@
 function install () {
-    [[ "$(xcode-select -p)" != "/Library/Developer/CommandLineTools" ]] && xcode-select --install
+  # check if xcode is installed
+  [[ "$(xcode-select -p)" != "/Library/Developer/CommandLineTools" ]] && xcode-select --install
 
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  # install homebrew
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-    [[ "$(uname -m)" == "x86_64" ]] && eval "$(/usr/local/bin/brew shellenv)"
-    [[ "$(uname -m)" == "arm64" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+  # set up homebrew environment based on the system architecture
+  [[ "$(uname -m)" == "x86_64" ]] && eval "$(/usr/local/bin/brew shellenv)"
+  [[ "$(uname -m)" == "arm64" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    brew install rbenv ruby-build
-    rbenv install 3.2.2
-    rbenv global 3.2.2
+  # install and configure rbenv and ruby
+  brew install rbenv ruby-build
+  rbenv install 3.2.2
+  rbenv global 3.2.2
 
-    brew install pyenv
-    pyenv install 3.12.0
-    pyenv global 3.12.0
+  # install and configure pyenv and python
+  brew install pyenv
+  pyenv install 3.12.0
+  pyenv global 3.12.0
 
-    brew install nvm
+  # install various development tools and utilities using homebrew
+  brew install nvm
+  brew install maven
+  brew install go mage
+  brew install curl
+  brew install wget
+  brew install jq
+  brew install xq
+  brew install yq
+  brew install ack
+  brew install tree
+  brew install tldr
+  brew install htop
+  brew install bat
 
-    brew install go mage
+  # install zsh plugins
+  brew install zsh-autosuggestions
+  brew install zsh-syntax-highlighting
 
-    brew install curl
-
-    brew install wget
-
-    brew install jq
-
-    brew install ack
-
-    brew install tree
-
-    brew install tldr
-
-    brew install htop
-
-    brew install bat
-
-    brew install zsh-autosuggestions
-
-    brew install zsh-syntax-highlighting
-
-    init
+  # call the init function to initialize the installed tools and plugins
+  init
 }
 
 function init () {
-    [[ "$(uname -m)" == "x86_64" ]] && eval "$(/usr/local/bin/brew shellenv)"
-    [[ "$(uname -m)" == "arm64" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
-    eval "$(pyenv init -)"
-    eval "$(rbenv init - zsh)"
+  # set up homebrew environment based on the system architecture
+  [[ "$(uname -m)" == "x86_64" ]] && eval "$(/usr/local/bin/brew shellenv)"
+  [[ "$(uname -m)" == "arm64" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    export NVM_DIR="$HOME/.nvm"
-    export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/highlighters"
+  # initialize pyenv and rbenv
+  eval "$(pyenv init -)"
+  eval "$(rbenv init - zsh)"
 
-    source "$NVM_DIR/nvm.sh"
-    source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-    source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  # set up NVM and zsh plugin directories
+  export NVM_DIR="$HOME/.nvm"
+  export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/highlighters"
 
-    [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
-    [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
+  # source NVM and zsh plugins
+  source "$NVM_DIR/nvm.sh"
+  source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+  # source additional NVM configuration files
+  [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
+  [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
 }
 
+# check if homebrew is installed, and call the appropriate function
 [[ "$(which brew)" == "brew not found" ]] && install || init
