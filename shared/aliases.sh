@@ -21,3 +21,9 @@ alias kl="kill -9"
 
 # print the current date and time
 alias now="date +'⏰ %r ⎮ 🗓️ %D'"
+
+# edit the global git config
+alias gitconfig="code ~/.gitconfig"
+
+# edit the .shell directory
+alias shell="code ~/.shell"

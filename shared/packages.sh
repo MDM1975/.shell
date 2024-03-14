@@ -1,6 +1,6 @@
 function install () {
   # check if xcode is installed
-  [[ "$(xcode-select -p)" != "/Library/Developer/CommandLineTools" ]] && xcode-select --install
+  [[ "$(xcode-select -p)" == "zsh: command not found: xcode-select" ]] && xcode-select --install
 
   # install homebrew
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -56,7 +56,6 @@ function init () {
   export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/highlighters"
 
   # source NVM and zsh plugins
-  source "$NVM_DIR/nvm.sh"
   source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
   source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
@@ -65,5 +64,4 @@ function init () {
   [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
 }
 
-# check if homebrew is installed, and call the appropriate function
-[[ "$(which brew)" == "brew not found" ]] && install || init
+init

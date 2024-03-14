@@ -22,7 +22,6 @@ function set_prompt () {
   local CURRENT_BATTERY="$(pmset -g batt | egrep "([0-9]{1,3}%)" -o)"
   local CURRENT_GIT_BRANCH=""
 
-
   [[ -n ${vcs_info_msg_0_} ]] && {
     CURRENT_GIT_BRANCH="%F{#14FF00}⎇%f $(print "${vcs_info_msg_0_}" | sed "s|/|%B%F{#14FF00}/%f%b|g")"
   } || {

@@ -10,14 +10,6 @@ This repository contains a custom Zsh configuration that enhances the shell expe
 - Stylish prompt displaying current directory, time, date, and Git branch information
 - Package installation and initialization for various development tools and plugins
 
-## Files
-
-- `aliases.sh`: Defines aliases for common commands and tasks.
-- `commands.sh`: Contains custom functions for displaying formatted messages, refreshing configurations, and more.
-- `options.sh`: Sets various shell options for autocompletion, directory navigation, history management, input/output behavior, and completion styling.
-- `packages.sh`: Installs and initializes various development tools and plugins using Homebrew.
-- `prompt.sh`: Configures a custom prompt that displays the current directory, time, date, and Git branch information.
-
 ## Installation
 
 1. Clone this repository to your local machine:
