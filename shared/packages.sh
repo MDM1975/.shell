@@ -1,6 +1,6 @@
 function install () {
   # check if xcode is installed
-  [[ "$(xcode-select -p)" == "zsh: command not found: xcode-select" ]] && xcode-select --install
+  [[ ! "$(command -v xcode-select)" ]] && xcode-select --install
 
   # install homebrew
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -64,4 +64,5 @@ function init () {
   [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
 }
 
-init
+# check if homebrew is installed and call the appropriate function
+[[ ! "$(command -v brew)" ]] && install || init

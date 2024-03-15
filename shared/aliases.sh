@@ -5,7 +5,7 @@ alias ls="ls -aSGF"
 alias nls="npm list -g"
 
 # list all paths in $PATH
-alias paths="echo $PATH | tr ':' '\n'"
+alias path="echo $PATH | tr ':' '\n'"
 
 # make directory and all parent directories
 alias mkdir='mkdir -p'
@@ -20,10 +20,16 @@ alias rmf='rm -f'
 alias kl="kill -9"
 
 # print the current date and time
-alias now="date +'⏰ %r ⎮ 🗓️ %D'"
+alias now="date +'%r ⎮ %D'"
 
 # edit the global git config
 alias gitconfig="code ~/.gitconfig"
 
 # edit the .shell directory
 alias shell="code ~/.shell"
+
+# edit the .zshrc file
+alias zshrc="code ~/.zshrc"
+
+# edit the .vimrc file
+alias vimrc="code ~/.vimrc"

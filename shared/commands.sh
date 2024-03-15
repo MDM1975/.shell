@@ -22,11 +22,6 @@ function pn_success () {
     print -P "%F{green}==>%f $1"
 }
 
-# refreshes the zsh configuration by sourcing the .zshrc file
-function zshre () {
-    source "$HOME/.zshrc"
-    pn_success "zsh resourced"
-}
 
 # refreshes the system by updating, upgrading, and cleaning up brew
 # and optionally performs a hard reset by purging the system cache and rebooting
@@ -34,7 +29,7 @@ function zshre () {
 # parameters:
 #   $1 - The flag to perform a hard reset
 function sysre () {
-    [[ "$(which brew)" != "brew not found" ]] && {
+    [[ "$(command -v brew)" ]] && {
         brew update -v
         brew upgrade -v
         brew autoremove -v
@@ -50,10 +45,16 @@ function sysre () {
     }
 }
 
+# refreshes the zsh configuration
+function zshre () {
+    source "$HOME/.zshrc"
+    pn_success "zsh resourced"
+}
+
 # refreshes the node modules by removing the node_modules directory and reinstalling the dependencies
 function nodere () {
-    [[ -d "./node_modules" ]] && {
-        rm -rdf "./node_modules"
+    [[ -d "$PWD/node_modules" ]] && {
+        rm -rdf "$PWD/node_modules"
         npm install
     } || {
         pn_error "The current directory does not contain a %F{yellow}node_modules%f directory."
