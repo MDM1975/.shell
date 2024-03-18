@@ -51,7 +51,7 @@ function init () {
   eval "$(pyenv init -)"
   eval "$(rbenv init - zsh)"
 
-  # set up NVM and zsh plugin directories
+  # export NVM and zsh plugin directories
   export NVM_DIR="$HOME/.nvm"
   export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/highlighters"
 
@@ -64,5 +64,4 @@ function init () {
   [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
 }
 
-# check if homebrew is installed and call the appropriate function
-[[ ! "$(command -v brew)" ]] && install || init
+init

@@ -1,7 +1,7 @@
 # prints a formatted info message with a blue arrow prefix
 #
 # parameters:
-#   $1 - The message to be printed
+#   $1 - the message to be printed
 function pn_info () {
     print -P "%F{blue}==>%f $1"
 }
@@ -9,7 +9,7 @@ function pn_info () {
 # prints a formatted error message with a red arrow prefix
 #
 # parameters:
-#   $1 - The message to be printed
+#   $1 - the message to be printed
 function pn_error () {
     print -P "%F{red}==>%f $1"
 }
@@ -17,7 +17,7 @@ function pn_error () {
 # prints a formatted success message with a green arrow prefix
 #
 # parameters:
-#   $1 - The message to be printed
+#   $1 - the message to be printed
 function pn_success () {
     print -P "%F{green}==>%f $1"
 }
@@ -27,7 +27,7 @@ function pn_success () {
 # and optionally performs a hard reset by purging the system cache and rebooting
 #
 # parameters:
-#   $1 - The flag to perform a hard reset
+#   $1 - the flag to perform a hard reset
 function sysre () {
     [[ "$(command -v brew)" ]] && {
         brew update -v
@@ -57,7 +57,7 @@ function nodere () {
         rm -rdf "$PWD/node_modules"
         npm install
     } || {
-        pn_error "The current directory does not contain a %F{yellow}node_modules%f directory."
+        pn_error "the current directory does not contain a %F{yellow}node_modules%f directory."
     }
 }
 
@@ -71,14 +71,26 @@ function envs () {
 # displays the weather for the specified city and state
 #
 # parameters:
-#   $1 - The city and state to display the weather for
+#   $1 - the city and state to display the weather for
 function weather () {
     [[ $# == 0 ]] && {
         pn_info "usage: weather <city>+<state>"
     } || {
-        local WEATHER=$(curl -s "https://v2.wttr.in/$1?u")
+        local WEAtHER=$(curl -s "https://v2.wttr.in/$1?u")
 
-        pn_info "$($WEATHER | grep 'Weather:' | sed 's|Weather:||')"
-        pn_info "$($WEATHER | grep 'Location:' | sed 's|Location:||')"
+        pn_info "$($WEAtHER | grep 'Weather:' | sed 's|Weather:||')"
+        pn_info "$($WEAtHER | grep 'Location:' | sed 's|Location:||')"
+    }
+}
+
+# copys the provided input to the clipboard
+#
+# parameters:
+#   $1 - the text to be copied
+function copy () {
+     [[ $# == 0 ]] && {
+        pn_info "usage: copy <text>"
+    } || {
+        echo $@ | pbcopy
     }
 }
