@@ -15,7 +15,7 @@ This repository contains a custom Zsh configuration that enhances the shell expe
 1. Clone this repository to your local machine:
 
 ```sh
-git clone https://github.com/MDM1975/.shell.git ~/.shell
+git clone https://github.com/MDM1975/.shell.git
 ```
 
 2. Add the following lines to your `.zshrc` file:
@@ -34,4 +34,4 @@ Once installed, you can start using the provided aliases, functions, and the cus
 
 Feel free to customize the configuration files according to your preferences. You can modify the aliases, functions, options, and prompt to suit your needs.
 
-To add functionality that is specific to your machine, you can create a `private` directory in `.shell` and add your script files there. These files will be automatically sourced.
+To add functionality that is specific to your machine, you can create a `local` directory in `.shell` and add your script files there. These files will be automatically sourced.

@@ -1,9 +1,8 @@
-function install () {
   # check if xcode is installed
   [[ ! "$(command -v xcode-select)" ]] && xcode-select --install
 
-  # install homebrew
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  # check if homebrew is installed
+  [[ ! "$(command -v brew)" ]] && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   # set up homebrew environment based on the system architecture
   [[ "$(uname -m)" == "x86_64" ]] && eval "$(/usr/local/bin/brew shellenv)"
@@ -38,11 +37,6 @@ function install () {
   brew install zsh-autosuggestions
   brew install zsh-syntax-highlighting
 
-  # call the init function to initialize the installed tools and plugins
-  init
-}
-
-function init () {
   # set up homebrew environment based on the system architecture
   [[ "$(uname -m)" == "x86_64" ]] && eval "$(/usr/local/bin/brew shellenv)"
   [[ "$(uname -m)" == "arm64" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -62,6 +56,3 @@ function init () {
   # source additional NVM configuration files
   [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
   [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
-}
-
-init

@@ -1,24 +1,25 @@
-# load shared files
-function load_shared () {
-    local SHARED=($HOME/.shell/shared/*)
+# load common files
+function load_common () {
+    local COMMON=($HOME/.shell/common/*)
 
-    for i in $SHARED
+    for i in $COMMON
+        # load common files
         do source $i
     done
 }
 
-# load private files
-function load_private () {
+# load local files
+function load_local () {
     [[ -d $1 ]] && {
-        local PRIVATE=($1/*)
+        local local=($1/*)
 
-        for i in $PRIVATE
-            # recursively load private files if directory
-            do [[ -d $1 ]] && load_private $i || source $i
+        for i in $local
+            # recursively load local files
+            do [[ -d $1 ]] && load_local $i || source $i
         done
     }
 }
 
-load_shared
+load_common
 
-load_private "$HOME/.shell/private/"
+load_local "$HOME/.shell/local"

@@ -1,20 +1,9 @@
 autoload -Uz promptinit
 autoload -Uz vcs_info
+autoload -Uz add-zsh-hook
 
 zstyle ":vcs_info:*" formats "%b"
 zstyle ":vcs_info:*" actionformats "%b | %a"
-
-# hook to run after a command is executed to update the version control information and set the prompt
-function precmd () {
-  vcs_info
-  set_prompt
-}
-
-# hook to run after the current directory is changed to update the version control information and set the prompt
-function chpwd () {
-  vcs_info
-  set_prompt
-}
 
 # set the prompt to display the current directory, time, date, and git branch
 function set_prompt () {
@@ -23,6 +12,8 @@ function set_prompt () {
   local CURRENT_DATE="$(date +%D | sed "s|/|%B%F{#14FF00}/%f%b|g")"
   local CURRENT_BATTERY="$(pmset -g batt | grep -E "([0-9]{1,3}%)" -o)"
   local CURRENT_GIT_BRANCH=""
+
+  vcs_info
 
   [[ -n ${vcs_info_msg_0_} ]] && {
     CURRENT_GIT_BRANCH="%F{#14FF00}⎇%f $(print "${vcs_info_msg_0_}" | sed "s|/|%B%F{#14FF00}/%f%b|g")"
@@ -36,3 +27,7 @@ function set_prompt () {
 
   RPROMPT="%F{#14FF00}(%F{#14FF00}(%f $CURRENT_TIME %B%F{#14FF00}|%f%b $CURRENT_DATE %B%F{#14FF00}|%f%b $CURRENT_BATTERY% %F{#14FF00})%f%F{#14FF00})%f"
 }
+
+# add the set_prompt function to the precmd and chpwd hooks
+add-zsh-hook precmd set_prompt
+add-zsh-hook chpwd set_prompt
