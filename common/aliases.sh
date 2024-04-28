@@ -33,3 +33,5 @@ alias zshrc="code ~/.zshrc"
 
 # edit the .vimrc file
 alias vimrc="code ~/.vimrc"
+
+alias ports="lsof -nP -iTCP:9229 -sTCP:LISTEN"

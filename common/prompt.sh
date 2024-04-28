@@ -16,7 +16,7 @@ function set_prompt () {
   vcs_info
 
   [[ -n ${vcs_info_msg_0_} ]] && {
-    CURRENT_GIT_BRANCH="%F{#14FF00}⎇%f $(print "${vcs_info_msg_0_}" | sed "s|/|%B%F{#14FF00}/%f%b|g")"
+    CURRENT_GIT_BRANCH="%F{#14FF00}⎇%f $(echo "${vcs_info_msg_0_}" | sed "s|/|%B%F{#14FF00}/%f%b|g")"
   } || {
     CURRENT_GIT_BRANCH=""
   }
