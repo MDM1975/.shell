@@ -2,6 +2,7 @@ autoload -Uz promptinit
 autoload -Uz vcs_info
 autoload -Uz add-zsh-hook
 
+# initialize the prompt system
 zstyle ":vcs_info:*" formats "%b"
 zstyle ":vcs_info:*" actionformats "%b | %a"
 

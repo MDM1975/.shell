@@ -1,23 +1,14 @@
 # show all files in current directory, including hidden files, sorted by size
 alias ls="ls -aSGF"
 
-# list global npm packages
-alias nls="npm list -g"
-
 # list all paths in $PATH
 alias path="echo $PATH | tr ':' '\n'"
 
-# make directory and all parent directories
-alias mkdir='mkdir -p'
-
-# remove directory and all its contents
-alias rmd='rm -rdf'
-
-# remove file
-alias rmf='rm -f'
-
 # kill process
 alias kl="kill -9"
+
+# kill all node processes
+alias kln="killall node"
 
 # print the current date and time
 alias now="date +'%r ⎮ %D'"
@@ -33,5 +24,3 @@ alias zshrc="code ~/.zshrc"
 
 # edit the .vimrc file
 alias vimrc="code ~/.vimrc"
-
-alias ports="lsof -nP -iTCP:9229 -sTCP:LISTEN"

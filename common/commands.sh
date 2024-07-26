@@ -29,11 +29,17 @@ function pn_success () {
 # parameters:
 #   $1 - the flag to perform a hard reset
 function sysre () {
-    [[ "$(command -v brew)" ]] && {
+    [[ -n "$(command -v brew)" ]] && {
+        pn_info "Refreshing packages..."
         brew update -v
         brew upgrade -v
         brew autoremove -v
-        brew cleanup -v --prune=all
+        brew cleanup -v -s --prune=all
+        brew doctor
+
+        [[ -n "$(command -v tldr)" ]] && {
+            tldr --update
+        }
     }
 
     [[ $1 == "--hard" ]] && {
@@ -76,10 +82,7 @@ function weather () {
     [[ $# == 0 ]] && {
         pn_info "usage: weather <city>+<state>"
     } || {
-        local WEAtHER=$(curl -s "https://v2.wttr.in/$1?u")
-
-        pn_info "$($WEAtHER | grep 'Weather:' | sed 's|Weather:||')"
-        pn_info "$($WEAtHER | grep 'Location:' | sed 's|Location:||')"
+        curl -s "https://v2.wttr.in/$1?u"
     }
 }
 
@@ -88,7 +91,7 @@ function weather () {
 # parameters:
 #   $1 - the text to be copied
 function copy () {
-     [[ $# == 0 ]] && {
+    [[ $# == 0 ]] && {
         pn_info "usage: copy <text>"
     } || {
         echo $@ | pbcopy
