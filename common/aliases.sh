@@ -24,3 +24,6 @@ alias zshrc="code ~/.zshrc"
 
 # edit the .vimrc file
 alias vimrc="code ~/.vimrc"
+
+# see all port processes listening
+alias ports="lsof -i -P -n | grep LISTEN"
