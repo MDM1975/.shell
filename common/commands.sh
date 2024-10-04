@@ -36,10 +36,10 @@ function sysre () {
         brew autoremove -v
         brew cleanup -v -s --prune=all
         brew doctor
+    }
 
-        [[ -n "$(command -v tldr)" ]] && {
-            tldr --update
-        }
+    [[ -n "$(command -v tldr)" ]] && {
+        tldr --update
     }
 
     [[ $1 == "--hard" ]] && {
