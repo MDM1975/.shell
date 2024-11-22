@@ -8,7 +8,7 @@ alias kl="kill -9"
 alias size="du -sh"
 
 # list all paths in $PATH
-alias path="echo $PATH | tr ':' '\n'"
+alias path="echo \$PATH | tr ':' '\n'"
 
 # see all port processes listening
 alias ports="lsof | grep LISTEN"

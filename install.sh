@@ -21,7 +21,9 @@ pyenv global 3.12.0
 # install various development tools and utilities using homebrew
 brew install nvm
 brew install maven
-brew install go mage
+brew install go
+brew install mage
+brew install gcc
 brew install curl
 brew install wget
 brew install jq

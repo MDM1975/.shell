@@ -29,26 +29,29 @@ function pn_success () {
 # parameters:
 #   $1 - the flag to perform a hard reset
 function sysre () {
-    [[ -n "$(command -v brew)" ]] && {
+    if [[ -n "$(command -v brew)" ]]
+    then
         pn_info "Refreshing packages..."
         brew update -v
         brew upgrade -v
         brew autoremove -v
         brew cleanup -v -s --prune=all
         brew doctor
-    }
+    fi
 
-    [[ -n "$(command -v tldr)" ]] && {
+    if [[ -n "$(command -v tldr)" ]]
+    then
         tldr --update
-    }
+    fi
 
-    [[ $1 == "--hard" ]] && {
+    if [[ $1 == "--hard" ]]
+    then
         pn_info "Performing hard reset..."
         sudo purge
         sudo reboot
-    } || {
+    else
         pn_info "To perform a hard reset, include the --hard flag to the sysre command."
-    }
+    fi
 }
 
 # refreshes the zsh configuration
@@ -59,17 +62,18 @@ function zshre () {
 
 # refreshes the node modules by removing the node_modules directory and reinstalling the dependencies
 function nodere () {
-    [[ -d "$PWD/node_modules" ]] && {
+    if [[ -d "$PWD/node_modules" ]]
+    then
         rm -rdf "$PWD/node_modules"
         npm install
-    } || {
+    else
         pn_error "the current directory does not contain a %F{yellow}node_modules%f directory."
-    }
+    fi
 }
 
 # lists the environment variables in the current shell
 function envs () {
-    for env in ${$(env | sort)}
+    for env in $(env | sort)
         do pn_info "$env\n"
     done
 }
@@ -79,11 +83,12 @@ function envs () {
 # parameters:
 #   $1 - the city and state to display the weather for
 function weather () {
-    [[ $# == 0 ]] && {
+    if [[ $# == 0 ]]
+    then
         pn_info "usage: weather <city>+<state>"
-    } || {
+    else
         curl -s "https://v2.wttr.in/$1?u"
-    }
+    fi
 }
 
 # copys the provided input to the clipboard
@@ -91,9 +96,10 @@ function weather () {
 # parameters:
 #   $1 - the text to be copied
 function copy () {
-    [[ $# == 0 ]] && {
+    if [[ $# == 0 ]]
+    then
         pn_info "usage: copy <text>"
-    } || {
-        echo $@ | pbcopy
-    }
+    else
+        echo "${@}" | pbcopy
+    fi
 }

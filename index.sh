@@ -1,23 +1,28 @@
 # load common files
 function load_common () {
-    local COMMON=($HOME/.shell/common/*)
+    local COMMON=("${HOME}"/.shell/common/*)
 
-    for i in $COMMON
+    for i in "${COMMON[@]}"
         # load common files
-        do source $i
+        do source "${i}"
     done
 }
 
 # load local files
 function load_local () {
-    [[ -d $1 ]] && {
-        local local=($1/*)
+    if [[ -d $1 ]]; then
+        local LOCAL=("$1"/*)
 
-        for i in $local
-            # recursively load local files
-            do [[ -d $1 ]] && load_local $i || source $i
+        for i in "${LOCAL[@]}"; do
+            if [[ -d $1 ]]; then
+                load_local "${i}"
+            else
+                source "${i}"
+            fi
         done
-    }
+    else
+        source "$1"
+    fi
 }
 
 load_common
