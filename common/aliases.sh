@@ -1,5 +1,5 @@
 # show all files in current directory, including hidden files, sorted by size
-alias ls="ls -aSGF"
+alias ls="ls -atGF"
 
 # kill process
 alias kl="kill -9"

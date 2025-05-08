@@ -2,9 +2,8 @@
 function load_common () {
     local COMMON=("${HOME}"/.shell/common/*)
 
-    for i in "${COMMON[@]}"
-        # load common files
-        do source "${i}"
+    for i in "${COMMON[@]}"; do
+        source "${i}"
     done
 }
 
@@ -26,5 +25,4 @@ function load_local () {
 }
 
 load_common
-
 load_local "$HOME/.shell/local"
