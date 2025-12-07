@@ -15,8 +15,13 @@ rbenv global 3.2.2
 
 # install and configure pyenv and python
 brew install pyenv
-pyenv install 3.12.0
-pyenv global 3.12.0
+pyenv install 3.9.11
+pyenv global 3.9.11
+
+# install and configure nodenv and node.js
+brew install nodenv
+nodenv install 20.19.3
+nodenv global 20.19.3
 
 # install various development tools and utilities using homebrew
 brew install nvm

@@ -13,7 +13,7 @@ function load_local () {
         local LOCAL=("$1"/*)
 
         for i in "${LOCAL[@]}"; do
-            if [[ -d $1 ]]; then
+            if [[ -d $i ]]; then
                 load_local "${i}"
             else
                 source "${i}"
